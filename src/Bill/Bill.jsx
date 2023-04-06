@@ -5,12 +5,19 @@ import "./Bill.css";
 
 const Bill = () => {
   const [country, setCountry] = useState(0); // 0 is Canada, 1 is USA
+  const [countryName, setcountryName] = useState("Canada");
 
   const canadaBills = ["Bill 1", "Bill 2", "Bill 3", "Bill 4"];
   const usaBills = ["Bill A", "Bill B", "Bill C", "Bill D"];
 
-  const bills = country === 0 ? canadaBills : usaBills;
 
+  const changeCountry = (c_index) => {
+    setCountry(c_index);
+    const c_name = country === 0 ? "USA" : "Canada"
+    setcountryName(c_name);
+  }
+
+const bills = country === 0 ? canadaBills : usaBills;
   // Split bills into chunks of two
   const billChunks = bills.reduce(
     (acc, bill, index) =>
@@ -22,14 +29,14 @@ const Bill = () => {
     <div className="bill">
       <h2>The Bill Project</h2>
       <div className="Buttons">
-        <button onClick={() => setCountry(1)}>U.S.A</button>
-        <button onClick={() => setCountry(0)}>Canada</button>
+        <button onClick={() => changeCountry(1)}>U.S.A</button>
+        <button onClick={() => changeCountry(0)}>Canada</button>
       </div>
       <div>
         <table className="bill-table">
           <thead>
             <tr>
-              <th colSpan="2">Country</th>
+              <th colSpan="2">{countryName}</th>
             </tr>
           </thead>
           <tbody>
